@@ -1,11 +1,25 @@
 const express = require("express");
-
+const mongoose = require("mongoose");
+require("dotenv").config();
 const app = express();
 
 //Import routes
 const authRoute = require("./routes/auth");
 
-//route middlewares
+//Connect to db
+const uri = process.env.dbUrl;
+mongoose.connect(
+  uri,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => {
+    console.log("Connected to db!");
+  }
+);
+
+//Middleware
+app.use(express.json());
+
+//Route middlewares
 app.use("/api/user", authRoute);
 
 const PORT = process.env.PORT || 5000;
