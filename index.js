@@ -5,6 +5,7 @@ const app = express();
 
 //Import routes
 const authRoute = require("./routes/auth");
+const postRoute = require("./routes/posts");
 
 //Connect to db
 const uri = process.env.dbUrl;
@@ -21,6 +22,7 @@ app.use(express.json());
 
 //Route middlewares
 app.use("/api/user", authRoute);
+app.use("/api/posts", postRoute);
 
 const PORT = process.env.PORT || 5000;
 
